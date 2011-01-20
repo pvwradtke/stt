@@ -1,0 +1,43 @@
+Timelapse Tools
+============
+
+Two tools to create time lapses from the user desktop and webcams attached to 
+computer. Both tools are open source and distributed under the Apache 2.0 license.
+For further details, sees the pache2.0_license.txt license file.
+
+1 - Building and installation
+-----------------------------
+
+To build on a GNU Posix environment, such as Linux, just type "make".
+
+To install, you must have super user rights. Just run "sudo make install". If 
+you can't perform this step, you can run the binaries produced by make at this
+folder.
+
+If you ever wish to uninstall those great tools, just type "sudo make uninstall".
+
+Finally, to clean up the build, just type "make clean".
+
+2 - Dependencies
+----------------
+
+Besides gcc, g++ and standard libraries, you need the following:
+
+	- OpenCV development libraries and binaries (libcv)
+	- OpenCV High GUI development files and binaries (libhighgui)
+  - Image Magick Tools, which must be accessible on the system path.
+
+3 - MacOS X Portability
+---------------
+
+Given that MacOS X is a Unix based system (FreeBSD), you should be able to 
+build the tools. They wheren't tested on a Mac, but there's no reason they
+should fail.
+
+4 - Contact:
+------------
+
+If you ever feel the need to, you can get in touch with the author:
+
+   Paulo V. W. Radtke - pvwradtke@gmail.com.
+

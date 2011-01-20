@@ -18,6 +18,11 @@ If you ever wish to uninstall those great tools, just type "sudo make uninstall"
 
 Finally, to clean up the build, just type "make clean".
 
+On windows, the desktopcapture tool should compile straightforward on Visual
+C++ (full or Express editions). As for the webcamcapture, you will need to setup
+ OpenCV and HighGui on your system and add both libraries to the project that 
+ will compile the tool.
+
 2 - Dependencies
 ----------------
 
@@ -25,14 +30,15 @@ Besides gcc, g++ and standard libraries, you need the following:
 
 	- OpenCV development libraries and binaries (libcv)
 	- OpenCV High GUI development files and binaries (libhighgui)
-  - Image Magick Tools, which must be accessible on the system path.
+	- Image Magick Tools, which must be accessible on the system path.
 
 3 - MacOS X Portability
 ---------------
 
 Given that MacOS X is a Unix based system (FreeBSD), you should be able to 
-build the tools. They wheren't tested on a Mac, but there's no reason they
-should fail.
+build the tools on the command line, given that you have OpenCV and Image Magick
+properly intalled. Thiswas not tested so far, but there's no reason they should
+not compile.
 
 4 - Contact:
 ------------

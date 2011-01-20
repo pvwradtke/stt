@@ -1,4 +1,4 @@
-/*
+	/*
 Timelapse - Desktop Capture
 
 Copyright 2010-2011, Paulo Vinicius Wolski Radtke (pvwradtke@gmail.com)
@@ -18,7 +18,12 @@ Copyright 2010-2011, Paulo Vinicius Wolski Radtke (pvwradtke@gmail.com)
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#if defined(linux)
+	#include <unistd.h>
+#endif
+#if defined(_MSC_VER)
+	#include <windows.h>
+#endif
 #include <time.h>
 
 int main(int argc, char **argv) {
@@ -62,9 +67,13 @@ int main(int argc, char **argv) {
     }
     while (1) {
         printf("Waiting %i seconds. Presss CTRL+C to quit (quick'n'dirty).\n", interval);
-        usleep(1000000 * interval);
+	#if defined(linux)
+		usleep(1000000 * interval);
+	#endif
+	#if defined(_MSC_VER)
+		Sleep(1000 * interval);
+	#endif
         printf("Capturing image desktop%010i.jpg\n", counter);
-        //system("scrot desktemp.jpg");
         system("import -window root desktemp.png");
         time(&rawtime);
         timeinfo = localtime(&rawtime);

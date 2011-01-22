@@ -19,6 +19,12 @@ Copyright 2011, Paulo Vinicius Wolski Radtke (pvwradtke@gmail.com)
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
+#if defined(linux)
+	#include <unistd.h>
+#endif
+#if defined(_MSC_VER)
+	#include <windows.h>
+#endif
 #include <iostream>
 #include <opencv/highgui.h>
 #include <opencv/cv.h>
@@ -35,7 +41,7 @@ int main(int argc, char** argv) {
     struct tm * timeinfo;
     // Retrieves arguments
     while (argpos < argc) {
-        if (strcmp(argv[argpos], "help") == 0) {
+        if (strcmp(argv[argpos], "--help") == 0 || strcmp(argv[argpos], "-h") == 0) {
             cout << "Usage: webcamcapture [OPTIONS]" << endl;
             cout << "Where OPTIONS are a combination of the following:" << endl;
             cout << "--test | -t: toggles on test mode for webcam positioning ad lighting test" << endl;
@@ -48,7 +54,7 @@ int main(int argc, char** argv) {
             cout << endl << "Parameters may be passed in any given order. The test parameter may need only the cam parameter, as the other parameters will be ignored." << endl;
             cout << "To test the font size, just let the program capture one screen and see the resulting image." << endl;
             return 0;
-        } else if (strcmp(argv[argpos], "query") == 0) {
+        } else if (strcmp(argv[argpos], "--query") == 0 || strcmp(argv[argpos], "-q") == 0) {
             cout << "Querying available webcams. Please wait or press CTRL+C to stop" << endl;
             for (int i = 0; i < 10; i++) {
                 CvCapture* capture = cvCreateCameraCapture(i);
@@ -102,7 +108,7 @@ int main(int argc, char** argv) {
             frame = cvQueryFrame(capture);
             if (!frame)
                 break;
-            cvShowImage("Camera", frame);
+            cvShowImage(windowname, frame);
             char c = cvWaitKey(33);
             if (c == 27)
                 break;
@@ -111,7 +117,6 @@ int main(int argc, char** argv) {
         cvDestroyWindow(windowname);
     }
     else {
-
         sprintf(windowname, "WebCamCapture - Capturing Camera %i at each %i seconds - ESC to quit", cam, interval);
         cvNamedWindow(windowname, CV_WINDOW_AUTOSIZE);
         CvCapture* capture = cvCreateCameraCapture(cam);
@@ -135,6 +140,12 @@ int main(int argc, char** argv) {
             }
             char c = cvWaitKey(33);
             if (c == 27) break;
+						#if defined(linux)
+							usleep(200000);
+						#endif
+						#if defined(_MSC_VER)
+							Sleep(200);
+						#endif
         }
         cvReleaseCapture(&capture);
         cvDestroyWindow(windowname);

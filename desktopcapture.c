@@ -66,13 +66,13 @@ int main(int argc, char **argv) {
         }
     }
     while (1) {
-        printf("Waiting %i seconds. Presss CTRL+C to quit (quick'n'dirty).\n", interval);
-	#if defined(linux)
-		usleep(1000000 * interval);
-	#endif
-	#if defined(_MSC_VER)
-		Sleep(1000 * interval);
-	#endif
+				printf("Waiting %i seconds. Presss CTRL+C to quit (quick'n'dirty).\n", interval);
+				#if defined(linux)
+					usleep(1000000 * interval);
+				#endif
+				#if defined(_MSC_VER)
+					Sleep(1000 * interval);
+				#endif
         printf("Capturing image desktop%010i.jpg\n", counter);
         system("import -window root desktemp.png");
         time(&rawtime);

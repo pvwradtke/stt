@@ -1,0 +1,2 @@
+STT - Simple timelapse tools.
+Simple command line tools to create timelapse image sequences based on the user's desktop and webcams. These tools were initially developed for use during the Global Game Jam, but are available for any other use as well.
